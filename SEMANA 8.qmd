@@ -1,0 +1,40 @@
+---
+title: "SEMANA_8"
+author: "NAYARA DELGADO"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## SEMANA_8
+
+Como instalar un paquete y Como crear el histograma
+
+. Nos dirigimos a la ventana inferior derecha donde encontraremos packages, luego de haber
+
+encontrado packages haremos clic en install.
+
+![](images/clipboard-866025836.png){width="619"}
+
+.Luego de haber hecho clic en install, descargaremos cualquier paquete para instalarlo, en mi
+
+caso será (car)
+
+![.Luego de a ver seleccionado el paquete, le haremos clic en istall](images/clipboard-2691562855.png)
+
+![](images/clipboard-38728635.png)
+
+Luego de haber seleccionado install, en la ventana inferior derecha les aparecerá el paquete
+
+ya instalado con el check activado
+
+![5.Por último realizaremos el histograma](images/clipboard-263410279.png)
+
+![](images/clipboard-1053793294.png)
+
+Aqui lo podemos visualizar
+
+![](images/clipboard-826367673.png)

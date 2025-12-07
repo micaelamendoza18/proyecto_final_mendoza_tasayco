@@ -1,0 +1,188 @@
+---
+title: "SEMANA_12"
+author: "CHRISTIAN_CHAVEZ"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+CASO_1
+
+```{r}
+# Dataset simulado
+set.seed(123)
+n <- 100
+IMC <- rnorm(n, 27, 4)
+PAS <- 90 + 1.5*IMC + rnorm(n, 0, 8)
+datos <- data.frame(IMC, PAS)
+head(datos)
+```
+
+```{r}
+#3.2 Ajustar modelo
+modelo_uni <- lm(PAS ~ IMC, data = datos)
+summary(modelo_uni)
+```
+
+```{r}
+#3.4 Gráfico
+plot(datos$IMC, datos$PAS, main="PAS vs IMC", xlab="IMC", ylab="PAS")
+abline(modelo_uni, lwd=2)
+```
+
+CASO_2
+
+```{r}
+#4.1 Dataset simulado
+set.seed(123)
+n <- 120
+IMC <- rnorm(n, 27, 4)
+Edad <- rnorm(n, 45, 10)
+Actividad <- rnorm(n, 3, 1) 
+# horas por semana
+# Modelo real para generar datos
+PAS <- 80 + 1.2*IMC + 0.6*Edad - 2.5*Actividad + rnorm(n, 0, 10)
+datos2 <- data.frame(IMC, Edad, Actividad, PAS)
+head(datos2)
+```
+
+```{r}
+# Modelo real para generar datos
+PAS <- 80 + 1.2*IMC + 0.6*Edad - 2.5*Actividad + rnorm(n, 0, 10)
+datos2 <- data.frame(IMC, Edad, Actividad, PAS)
+head(datos2)
+```
+
+```{r}
+#4.2 Ajustar modelo múltiple
+modelo_multi <- lm(PAS ~ IMC + Edad + Actividad, data = datos2)
+summary(modelo_multi)
+```
+
+```{r}
+#4.4 Comparar modelos
+anova(modelo_uni, modelo_multi)
+```
+
+```{r}
+#4.5 Diagnóstico del modelo (muy importante)
+par(mfrow=c(2,2))
+plot(modelo_multi)
+```
+
+CASO_3
+
+```{r}
+#1. En R sería:
+set.seed(123)
+Edad <- sample(20:70, 30, replace=TRUE)
+Glucosa <- 70 + 0.9*Edad + rnorm(30, 0, 8)
+datos <- data.frame(Edad, Glucosa)
+```
+
+#2. Ajustar el modelo #Se obtuvo la ecuación de regresión: #෣𝐺𝑙𝑢𝑐𝑜𝑠𝑎 = 73.64 + 0.815 ⋅ 𝐸𝑑𝑎𝑑 #Coeficientes obtenidos: #•β0 (intercepto): 73.64 #•β1 (pendiente): 0.8151
+
+#3. Interpretación de β1 #β1 = 0.8151 #Por cada año adicional de edad, el nivel de glucosa #aumenta en promedio 0.815 mg/dL. #Es un efecto clínicamente razonable: mayor edad → mayor #riesgo metabólico.
+
+#4. ¿Es significativo? \# p-valor de β1: \# p = 5.99 × 10⁻⁷ #Como p \< 0.05, concluimos que: #La edad es un predictor estadísticamente significativo del nivel de glucosa.
+
+```{r}
+#5. Gráfico (código en R)
+plot(Edad, Glucosa,
+     main = "Relación entre Edad y Glucosa",
+     xlab = "Edad (años)",
+     ylab = "Glucosa (mg/dL)",
+     pch = 19)
+abline(lm(Glucosa ~ Edad), col="blue", lwd=2)
+```
+
+CASO_4
+
+```{r}
+#1. Crear o cargar el dataset
+set.seed(123)
+n <- 80
+IMC <- rnorm(n, 27, 4)
+Edad <- rnorm(n, 45, 10)
+Grasas <- rnorm(n, 60, 15)
+Colesterol <- 95 + 2.1*IMC + 0.85*Edad + 1.45*Grasas + rnorm(n, 0, 15)
+datos <- data.frame(IMC, Edad, Grasas, Colesterol)
+head(datos)
+```
+
+```{r}
+#2. Ajustar el modelo múltiple
+modelo <- lm(Colesterol ~ IMC + Edad + Grasas, data =
+               datos)
+summary(modelo)
+```
+
+```{r}
+#4. ¿Qué variable predice mejor?
+summary(modelo)$coefficients
+```
+
+```{r}
+#5. Verificar supuestos del modelo
+par(mfrow=c(2,2))
+plot(modelo)
+```
+
+CASO_5
+
+```{r}
+#1. Cargar datos en R
+set.seed(123)
+n <- 40
+Edad <- sample(20:70, n, replace = TRUE)
+Glucosa <- 70 + 0.9*Edad + rnorm(n, 0, 10)
+datos1 <- data.frame(Edad, Glucosa)
+head(datos1)
+```
+
+```{r}
+#2. Ajustar el modelo
+modelo1 <- lm(Glucosa ~ Edad, data = datos1)
+summary(modelo1)
+```
+
+```{r}
+#3. Graficar
+plot(datos1$Edad, datos1$Glucosa,
+     main = "Glucosa vs Edad",
+     xlab = "Edad", ylab = "Glucosa")
+abline(modelo1, col="red", lwd=2)
+```
+
+CASO_6
+
+```{r}
+#1. Generar y cargar el dataset
+set.seed(123)
+n <- 50
+IMC <- rnorm(n, 27, 4)
+Edad <- sample(20:75, n, replace = TRUE)
+Grasas <- rnorm(n, 80, 20)
+Colesterol <- 120 + 1.8*IMC + 0.5*Edad + 0.9*Grasas + rnorm(n, 0, 20)
+datos2 <- data.frame(Colesterol, IMC, Edad, Grasas)
+head(datos2)
+
+```
+
+```{r}
+#2. Ajustar el modelo múltiple
+modelo2 <- lm(Colesterol ~ IMC + Edad + Grasas, data = datos2)
+summary(modelo2)
+```
+
+```{r}
+#3. Diagnóstico de supuestos
+par(mfrow=c(2,2))
+plot(modelo2)
+par(mfrow=c(1,1))
+```

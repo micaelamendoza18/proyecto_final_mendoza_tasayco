@@ -1,0 +1,171 @@
+---
+title: "SEMANA_10"
+author: "CHRISTIAN_CHAVEZ"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+# Datos
+edad <- c(25,30,35,40,45,50,55,60,65,70,75,80)
+dias <- c(2,3,4,4,5,6,7,7,8,9,9,10)
+```
+
+```{r}
+# Crear dataframe
+datos <- data.frame(edad, dias)
+```
+
+```{r}
+# Regresión lineal
+modelo <- lm(dias ~ edad, data = datos)
+```
+
+```{r}
+# Resumen del modelo
+summary(modelo)
+```
+
+```{r}
+# Gráfico
+plot(edad, dias,
+     main = "Relación entre edad y días hospitalizado",
+     xlab = "Edad del paciente",
+     ylab = "Días hospitalizado")
+
+abline(modelo, col="blue", lwd=2)
+```
+
+CASO_2
+
+```{r}
+# Datos
+edad <- c(25,30,35,40,45,50,55,60,65,70,75,80)
+presion <- c(110,118,120,124,128,130,135,138,140,145,150,155)
+dias <- c(2,3,4,4,5,6,7,7,8,9,9,10)
+```
+
+```{r}
+# Crear dataframe
+datos <- data.frame(edad, presion, dias)
+```
+
+```{r}
+# Modelo de regresión múltiple
+modelo <- lm(dias ~ edad + presion, data = datos)
+```
+
+```{r}
+# Resumen del modelo
+summary(modelo)
+```
+
+```{r}
+# Graficar relación simple con presión
+plot(presion, dias,
+     main="Relación entre presión arterial y días hospitalizado",
+     xlab="Presión Arterial (mmHg)",
+     ylab="Días hospitalizado")
+abline(lm(dias ~ presion), col="red", lwd=2)
+```
+
+CASO_3
+
+```{r}
+# Ingresar los datos
+IMC <- c(20,22,23,24,25,27,28,30,31,32,34,36)
+glucosa <- c(78,85,88,90,95,100,105,112,115,118,125,132)
+datos <- data.frame(IMC, glucosa)
+```
+
+```{r}
+# Ajustar un modelo de regresión lineal
+modelo <- lm(glucosa ~ IMC, data = datos)
+summary(modelo)
+```
+
+```{r}
+# Graficar resultados
+plot(IMC, glucosa,
+     main = "Relación entre IMC y glucosa en ayunas",
+     xlab = "IMC (kg/m²)",
+     ylab = "Glucosa (mg/dL)",
+     pch = 19)
+abline(modelo, col="blue", lwd=2)
+```
+
+### CASO_4
+
+```{r}
+# Ingresar los datos
+IMC <- c(20,22,23,24,25,27,28,30,31,32,34,36)
+colesterol <- c(160,170,175,180,190,200,210,220,225,230,240,250)
+glucosa <- c(78,85,88,90,95,100,105,112,115,118,125,132)
+
+datos <- data.frame(IMC, colesterol, glucosa)
+
+```
+
+```{r}
+# Crear el modelo de regresión múltiple
+modelo <- lm(glucosa ~ IMC + colesterol, data = datos)
+summary(modelo)
+```
+
+```{r}
+# Revisar diagnóstico del modelo (opcional)
+par(mfrow=c(2,2))
+plot(modelo)
+```
+
+```{r}
+# Gráfico simple con IMC y glucosa
+plot(IMC, glucosa,
+     main="Glucosa vs IMC",
+     xlab="IMC",
+     ylab="Glucosa",
+     pch=19)
+abline(lm(glucosa ~ IMC), col="blue", lwd=2)
+```
+
+CASO_5
+
+```{r}
+# Matriz de correlación en R
+IMC <- c(20,22,23,24,25,27,28,30,31,32,34,36)
+colesterol <- c(160,170,175,180,190,200,210,220,225,230,240,250)
+glucosa <- c(78,85,88,90,95,100,105,112,115,118,125,132)
+
+datos <- data.frame(IMC, colesterol, glucosa)
+```
+
+```{r}
+# Matriz de correlación
+cor(datos)
+```
+
+```{r}
+# Prueba estadística de correlación
+cor.test(IMC, glucosa)
+cor.test(colesterol, glucosa)
+cor.test(IMC, colesterol)
+```
+
+```{r}
+# Gráfico de correlación
+pairs(datos,    main = "Diagramas de dispersión entre IMC, colesterol y glucosa")
+```
+
+```{r}
+# Coeficiente de correlación parcial
+library(ppcor)
+pcor.test(glucosa, colesterol, IMC)
+```

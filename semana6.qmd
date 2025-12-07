@@ -1,0 +1,10 @@
+---
+title: "semana6"
+format: html
+---
+
+#CARGANDO DATA A UTILIZAR
+data<- read_csv("C:/Users/User/Downloads/s14_glucosa_circun.csv")
+
+#LIMPIAR DATA DE UNA COLUMNA QUE CONTENGA FILAS CON NA
+data_limpia<-data[!is.na(data$imc),]
